@@ -27,7 +27,7 @@ int main() {
     string name;
     while (choice!=4){
         cout << "Menu" <<endl;
-        cout << "1. Increase Friendship\n" << "2. Decrease Friendship\n" << "3. Search for Villager\n" << "4. Exit" <<endl;
+        cout << "1. Increase Friendship\n" << "2. Decrease Friendship\n" << "3. Search for Villager\n" << "4. Add Villager\n" << "5. Delete Villager\n"<<"6. Exit" <<endl;
         cout << "Enter your choice: ";
         cin >> choice;
         switch (choice){
@@ -76,6 +76,35 @@ int main() {
                 printV(villagers);
             }
             case 4:{
+                int level;
+                string species, phrase;
+                cout << "Name of villager: ";
+                cin >> name;
+                cout << "\nLevel of friendship: ";
+                cin >> level;
+                cout << "\nSpecies: ";
+                cin >> species;
+                cout << "\nA phrase that this villager will say: ";
+                cin >> phrase;
+                villagers[name] = make_tuple(level, species, phrase);
+                printV(villagers);
+                break;
+            }
+            case 5:{
+                cout << "Enter name of the villager to remove: ";
+                cin >> name;
+                auto it = villagers.find(name);
+                if (it != villagers.end()) {  // the iterator points to beyond the end of the map
+                                       // if searchKey is not found
+                cout << "\nFound " << searchKey << "'s information: " << get<0>(it->second) << ", "<< get<1>(it->second) << ", "<< get<2>(it->second) << endl;
+                } 
+                else{
+                    cout << endl << searchKey << " not found." << endl;
+                }
+                break;
+            }
+            
+            case 6:{
                 cout << "Exitting" << endl;
                 break;
             }
