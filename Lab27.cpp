@@ -25,9 +25,6 @@ int main() {
     
     int choice=0;
     string name;
-    cout << "Menu" <<endl;
-    cout << "1. Increase Friendship\n" << "2. Decrease Friendship\n" << "3. Search for Villager\n" << "4. Exit" <<endl;
-    cin >> choice;
     while (choice!=4){
         cout << "Menu" <<endl;
         cout << "1. Increase Friendship\n" << "2. Decrease Friendship\n" << "3. Search for Villager\n" << "4. Exit" <<endl;
