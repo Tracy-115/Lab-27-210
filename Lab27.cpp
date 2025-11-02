@@ -43,6 +43,33 @@ int main() {
     cout << "\nSize before clear: " << villagers.size() << endl;
     villagers.clear();
     cout << "Size after clear: " << villagers.size() << endl;
+    int choice;
+    string name;
+    cout << "Menu" <<endl;
+    cout << "1. Increase Friendship\n" << "2. Decrease Friendship\n" << "3. Search for Villager\n << "4. Exit" <<endl;
+    while (choice!=4){
+        if (choice = 1){
+            cout << "Enter the name to increase friendship: ";
+            cin >> name;
+            auto it = villagers.find(name);
+            if (it != villagers.end()) {
+                int level = get<0>(it->second);
+                if (level < 10) level++;
+                get<0>(it->second) = level;
+                cout << name << "'s friendship increased to " << level << "!\n";
+            } 
+            else {
+                cout << "Villager not found.\n";
+            }
+            cout << "Villagers and their informations :" << endl;
+            for (auto pair : villagers) {
+            cout << pair.first << ": " << get<0>(pair.second) << ", "<< get<1>(pair.second) << ", "<< get<2>(pair.second) << endl;
+            }
+        }
+        if (choice = 2){
+            cout << 
+        }
+}
 
     return 0;
 }
