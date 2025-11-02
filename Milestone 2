@@ -9,21 +9,22 @@ int main() {
 
     // insert elements into the map
     // note how the right-hand side of the assignment are the vector elements
-    villagerColors["Audie"] = make_tuple(8, "mouse", "i want cheese");
-    villagerColors["Raymond"] = make_tuple(5, "cat", "where did the mouse go");
-    villagerColors.insert({"Marshal", make_tuple(9, "elephant", "the sunrise is so pretty")});
-
+    //friendship level, species, and catchphrase
+    villagers["Audie"] = make_tuple(8, "mouse", "i want cheese");
+    villagers["Raymond"] = make_tuple(5, "cat", "where did the mouse go");
+    villagers.insert({"Marshal", make_tuple(9, "elephant", "the sunrise is so pretty")});
+    //get<n> where n is the index is used to get the data from tuple
     // access the map using a range-based for loop
-    cout << "Villagers and their favorite colors (range-based for loop):" << endl;
-    for (auto pair : villagerColors) {
-        cout << pair.first << ": " << pair.second << ", "<< pair.second << endl;
+    cout << "Villagers and their informations (range-based for loop):" << endl;
+    for (auto pair : villagers) {
+        cout << pair.first << ": " << get<0>(pair.second) << ", "<< get<1>(pair.second) << ", "<< get<2>(pair.second) << endl;
     }
 
     // access the map using iterators
-    cout << "\nVillagers and their favorite colors (iterators):" << endl;
-    for (map<string, vector<string>>::iterator it = villagers.begin(); 
+    cout << "\nVillagers and their informations (iterators):" << endl;
+    for (map<string, tuple<int, string, string>>::iterator it = villagers.begin(); 
                                                it != villagers.end(); ++it) {
-        cout << it->first << ": " << it->second << ", "<< it->second << ", "<< it->second << endl;
+        cout << it->first << ": " << get<0>(it->second) << ", "<< get<1>(it->second) << ", "<< get<2>(it->second) << endl;
     }
 
     // delete an element
@@ -34,7 +35,7 @@ int main() {
     auto it = villagers.find(searchKey);
     if (it != villagers.end()) {  // the iterator points to beyond the end of the map
                                        // if searchKey is not found
-        cout << "\nFound " << searchKey << "'s favorite colors: " << it->second <<", "<< it->second <<", "<< it->second <<endl;
+        cout << "\nFound " << searchKey << "'s information: " << get<0>(it->second) << ", "<< get<1>(it->second) << ", "<< get<2>(it->second) << endl;
     } else
         cout << endl << searchKey << " not found." << endl;
 
