@@ -3,6 +3,13 @@
 #include <vector>
 using namespace std;
 
+void printV (const map<string, tuple<int, string, string>> villagers){
+    cout << "Villagers and their informations :" << endl;
+    for (auto pair : villagers) {
+        cout << pair.first << ": " << get<0>(pair.second) << ", "<< get<1>(pair.second) << ", "<< get<2>(pair.second) << endl;
+    }
+}
+
 int main() {
     // declarations
     map<string, tuple<int, string, string>> villagers;
@@ -15,10 +22,7 @@ int main() {
     villagers.insert({"Marshal", make_tuple(9, "elephant", "the sunrise is so pretty")});
     //get<n> where n is the index is used to get the data from tuple
     // access the map using a range-based for loop
-    cout << "Villagers and their informations (range-based for loop):" << endl;
-    for (auto pair : villagers) {
-        cout << pair.first << ": " << get<0>(pair.second) << ", "<< get<1>(pair.second) << ", "<< get<2>(pair.second) << endl;
-    }
+    
 
     // access the map using iterators
     cout << "\nVillagers and their informations (iterators):" << endl;
@@ -46,30 +50,42 @@ int main() {
     int choice;
     string name;
     cout << "Menu" <<endl;
-    cout << "1. Increase Friendship\n" << "2. Decrease Friendship\n" << "3. Search for Villager\n << "4. Exit" <<endl;
+    cout << "1. Increase Friendship\n" << "2. Decrease Friendship\n" << "3. Search for Villager\n" << "4. Exit" <<endl;
+    cin >> choice;
     while (choice!=4){
-        if (choice = 1){
-            cout << "Enter the name to increase friendship: ";
-            cin >> name;
-            auto it = villagers.find(name);
-            if (it != villagers.end()) {
-                int level = get<0>(it->second);
-                if (level < 10) level++;
-                get<0>(it->second) = level;
-                cout << name << "'s friendship increased to " << level << "!\n";
-            } 
-            else {
-                cout << "Villager not found.\n";
+        switch (choice){
+            case 1 :
+                cout << "Enter the name to increase friendship: ";
+                cin >> name;
+                auto it = villagers.find(name);
+                if (it != villagers.end()) {
+                    int level = get<0>(it->second);
+                    if (level < 10) level++;
+                    get<0>(it->second) = level;
+                    cout << name << "'s friendship increased to " << level << "!\n";
+                } 
+                else {
+                    cout << "Villager not found.\n";
+                }
+                printV(villagers);
+                break;
+            case 2 :
+                cout << "Enter the name to decrease friendship: ";
+                cin >> name;
+                auto it = villagers.find(name);
+                if (it != villagers.end()) {
+                    int level = get<0>(it->second);
+                    if (level > 0) level--;
+                    get<0>(it->second) = level;
+                    cout << name << "'s friendship decreased to " << level << "!\n";
+                } 
+                else {
+                    cout << "Villager not found.\n";
+                }
+                printV(villagers);
+                break;
             }
-            cout << "Villagers and their informations :" << endl;
-            for (auto pair : villagers) {
-            cout << pair.first << ": " << get<0>(pair.second) << ", "<< get<1>(pair.second) << ", "<< get<2>(pair.second) << endl;
-            }
-        }
-        if (choice = 2){
-            cout << 
-        }
-}
+    }
 
     return 0;
 }
